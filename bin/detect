@@ -1,7 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-if [ -f $1/rebar.config ]; then
-    echo "Erlang application"
+rebar_file="$1/rebar.config"
+
+if [ -f $rebar_file ]; then
+    echo "Erlang application - heroku-18"
     exit 0
 else
     exit 1

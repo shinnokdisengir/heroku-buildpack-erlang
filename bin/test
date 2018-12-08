@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo OK!
+# cd "$1" && mix test
