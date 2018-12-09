@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 
-export_env_dir() {
-    env_dir=$1
-    whitelist_regex=${2:-''}
-    blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-    if [ -d "$env_dir" ]; then
-        for e in $(ls $env_dir); do
-            echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-            export "$e=$(cat $env_dir/$e)"
-            :
-        done
-    fi
-}
+
 
 # If this var is set to true later on,
 # then elixir and rebar will be rebuilt
-erlang_changed=false
-rebar_changed=false
+# erlang_changed=false
+# rebar_changed=false
 
 build_pack_path=$(cd $(dirname $(dirname $0)); pwd)
 
@@ -27,13 +16,15 @@ build_path=$(cd $1 && pwd)
 cache_path=$(cd $2 && pwd)
 env_path=$(cd $3 && pwd)
 
+echo -----> Logs path
+echo $build_path
+echo $cache_path
+echo $env_path
 
-
-
-# source ${build_pack_path}/lib/path_funcs.sh
-# source ${build_pack_path}/lib/misc_funcs.sh
-# source ${build_pack_path}/lib/erlang_funcs.sh
-# source ${build_pack_path}/lib/app_funcs.sh
+source ${build_pack_path}/lib/path_funcs.sh
+source ${build_pack_path}/lib/misc_funcs.sh
+source ${build_pack_path}/lib/erlang_funcs.sh
+source ${build_pack_path}/lib/app_funcs.sh
 
 # mkdir $(platform_tools_path)
 
