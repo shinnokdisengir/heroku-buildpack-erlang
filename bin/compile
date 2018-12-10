@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-
-
 # If this var is set to true later on,
 # then elixir and rebar will be rebuilt
 # erlang_changed=false
 # rebar_changed=false
 
-build_pack_path=$(cd $(dirname $(dirname $0)); pwd)
+build_pack_path=$(
+	cd $(dirname $(dirname $0))
+	pwd
+)
 
 # Ensure dirs are present
 mkdir -p $1 $2 $3
@@ -16,7 +17,8 @@ build_path=$(cd $1 && pwd)
 cache_path=$(cd $2 && pwd)
 env_path=$(cd $3 && pwd)
 
-echo -----> Logs path
+echo "-----> Logs path"
+echo $build_pack_path
 echo $build_path
 echo $cache_path
 echo $env_path
@@ -26,34 +28,30 @@ source ${build_pack_path}/lib/misc_funcs.sh
 source ${build_pack_path}/lib/erlang_funcs.sh
 source ${build_pack_path}/lib/app_funcs.sh
 
-# mkdir $(platform_tools_path)
+mkdir $(platform_tools_path)
 
-# load_config
-# export_env_vars
-# export_mix_env
+load_config
+export_env_vars
+export_mix_env
 
-# check_stack
-# clean_cache
+check_stack
+clean_cache
 
-# download_erlang
-# install_erlang
+download_erlang
+install_erlang
+install_rebar
+deploy_erlang
 
-# download_elixir
-# install_elixir
-# restore_mix
-# install_hex
-# install_rebar
-
-# restore_app
-# hook_pre_app_dependencies
-# app_dependencies
+restore_app
+hook_pre_app_dependencies
+app_dependencies
 # copy_hex
 
-# hook_pre_compile
-# compile_app
-# hook_post_compile
+hook_pre_compile
+compile_app
+hook_post_compile
 
-# backup_app
-# backup_mix
-# write_profile_d_script
-# write_export
+backup_app
+backup_mix
+write_profile_d_script
+write_export
