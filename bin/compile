@@ -17,9 +17,8 @@ build_path=$(cd $1 && pwd)
 cache_path=$(cd $2 && pwd)
 env_path=$(cd $3 && pwd)
 
-echo "-----> Check installed"
+echo "-----> Check erlang installed"
 which erl
-which rebar3
 
 echo "-----> Logs path"
 echo $build_pack_path
@@ -41,10 +40,10 @@ export_mix_env
 check_stack
 clean_cache
 
-download_erlang
-install_erlang
+# download_erlang
+# install_erlang
+# deploy_erlang
 install_rebar
-deploy_erlang
 
 restore_app
 hook_pre_app_dependencies
