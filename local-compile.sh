@@ -1,1 +1,1 @@
-./bin/compile host/build/ host/cache/ host/env/
+STACK=heroku-18 ./bin/compile host/build/ host/cache/ host/env/

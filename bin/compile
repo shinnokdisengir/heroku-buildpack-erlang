@@ -17,6 +17,10 @@ build_path=$(cd $1 && pwd)
 cache_path=$(cd $2 && pwd)
 env_path=$(cd $3 && pwd)
 
+echo "-----> Check installed"
+which erl
+which rebar3
+
 echo "-----> Logs path"
 echo $build_pack_path
 echo $build_path
