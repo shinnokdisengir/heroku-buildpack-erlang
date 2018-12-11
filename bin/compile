@@ -48,7 +48,7 @@ function install_rebar() {
 
 function deploy_rebar() {
 	cp -R $(rebar_build_path) $(rebar_path)
-	PATH=$(erlang_path)/bin:$PATH
+	PATH=$(rebar_path):$PATH
 }
 
 
