@@ -17,9 +17,6 @@ build_path=$(cd $1 && pwd)
 cache_path=$(cd $2 && pwd)
 env_path=$(cd $3 && pwd)
 
-echo "-----> Check erlang installed"
-which erl
-
 echo "-----> Logs path"
 echo $build_pack_path
 echo $build_path
@@ -28,33 +25,53 @@ echo $env_path
 
 source ${build_pack_path}/lib/path_funcs.sh
 source ${build_pack_path}/lib/misc_funcs.sh
-source ${build_pack_path}/lib/erlang_funcs.sh
 source ${build_pack_path}/lib/app_funcs.sh
 
 mkdir $(platform_tools_path)
 
 load_config
 export_env_vars
-export_mix_env
 
 check_stack
 clean_cache
 
-# download_erlang
-# install_erlang
-# deploy_erlang
+function create_paths() {
+	rm -rf $(rebar_build_path)
+	mkdir -p $(rebar_build_path)
+}
+
+function install_rebar() {
+	output_section "Installing rebar"
+	wget https://s3.amazonaws.com/rebar3/rebar3 -O $(rebar_build_path)/rebar3
+	chmod +x $(rebar_build_path)/rebar3
+}
+
+function deploy_rebar() {
+	cp -R $(rebar_build_path) $(rebar_path)
+	PATH=$(erlang_path)/bin:$PATH
+}
+
+
+function compile() {
+	rebar3 compile
+}
+
+create_paths
 install_rebar
+deploy_rebar
 
-restore_app
-hook_pre_app_dependencies
-app_dependencies
-# copy_hex
+compile
 
-hook_pre_compile
-compile_app
-hook_post_compile
+# restore_app
+# # hook_pre_app_dependencies
+# app_dependencies
+# # copy_hex
 
-backup_app
-backup_mix
-write_profile_d_script
-write_export
+# # hook_pre_compile
+# compile_app
+# # hook_post_compile
+
+# backup_app
+# backup_mix
+# write_profile_d_script
+# write_export

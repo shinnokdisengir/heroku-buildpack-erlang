@@ -44,6 +44,11 @@ function erlang_changed() {
 	fi
 }
 
+function create_paths() {
+	rm -rf $(erlang_build_path)
+	mkdir -p $(erlang_build_path)
+}
+
 function install_rebar() {
 	output_section "Installing rebar"
 	wget -o $(erlang_build_path)/rebar3 https://s3.amazonaws.com/rebar3/rebar3
@@ -51,6 +56,6 @@ function install_rebar() {
 }
 
 function deploy_erlang() {
-	cp -R $(erlang_build_path) $(erlang_path)
+	mv -R $(erlang_build_path) $(erlang_path)
 	PATH=$(erlang_path)/bin:$PATH
 }

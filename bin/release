@@ -5,5 +5,5 @@ cat <<EOF
 addons:
   []
 default_process_types:
-  rebar: rebar3 auto
+  web: rebar3 run
 EOF

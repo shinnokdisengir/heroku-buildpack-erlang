@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-rebar_file="$1/rebar.config"
+if ! [ -n $(erl +V) ]; then
+    echo "No erlang installed!"
+    exit 1
+fi
 
+rebar_file="$1/rebar.config"
 if [ -f $rebar_file ]; then
     echo "Erlang application - heroku-18"
     exit 0
